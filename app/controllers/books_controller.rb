@@ -4,6 +4,10 @@ class BooksController < ApplicationController
 
     def index
       @books = Book.where(user_id: current_user.id)
+      respond_to do |format|
+        format.html
+        format.json { render :json => @books }
+      end
     end
 
     def show

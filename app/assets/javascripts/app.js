@@ -19,8 +19,8 @@ library.config(['$routeProvider', function($routeProvider){
   .otherwise({redirectTo: '/'});
 }]);
 
-library.controller('BooksController', ['$scope', function($scope){
-  $scope.va = 'varvar'
+library.controller('BooksController', ['$scope', 'Book', function($scope, Book){
+  $scope.books = Book.query();
 }]);
 library.controller('MusicController', ['$scope', function($scope){
 
