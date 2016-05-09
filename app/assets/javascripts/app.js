@@ -1,10 +1,15 @@
-var library = angular.module('library', ['templates', 'ngRoute', 'controllers']);
+(function(){
+var library = angular.module('library', ['templates', 'ngRoute']);
 
-library.config(['$routeProvider', functino($routeProvider){
-  $routeProvider.when('/', templateUrl: 'index.html')
+library.config(['$routeProvider', function($routeProvider){
+  $routeProvider
+  .when('/', {templateUrl: 'index.html'})
+  .when('/books', {
+    templateUrl: 'books/index.html',
+    controller: 'BooksController'})
 }]);
 
-var controllers = angluar.module('controllers', []);
-controllers.controller('BooksController', ['$scope', function($scope){
-
+library.controller('BooksController', ['$scope', function($scope){
+  $scope.va = 'varvar'
 }]);
+})();

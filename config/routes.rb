@@ -8,6 +8,9 @@ Rails.application.routes.draw do
   root 'home#index'
 
   resources :books, only: [:index, :show, :create, :update, :destory]
+
+  get "/*" => "home#index"
+
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 
