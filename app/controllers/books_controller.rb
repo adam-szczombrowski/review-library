@@ -1,5 +1,6 @@
 class BooksController < ApplicationController
     skip_before_filter :verify_authenticity_token
+    before_action :user_exists?
 
     def index
       @books = Book.where(user_id: current_user.id)
@@ -26,6 +27,10 @@ class BooksController < ApplicationController
     end
 
     private
+
+    def user_exists?
+      redirect_to root_path unless current_user
+    end
 
     def book_params
       params.require(:book).permit(:author, :review, :rating)
