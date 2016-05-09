@@ -21,11 +21,15 @@ library.config(['$routeProvider', function($routeProvider){
 
 library.controller('BooksController', ['$scope', 'Book', function($scope, Book){
   $scope.books = Book.query();
-  $scope.book = {};
+  $scope.newBook = {};
+  $scope.orderProp = '-updated_at';
   $scope.save = function(){
-    console.log($scope.book);
-    Book.save($scope.book);
-  }
+    console.log($scope.newBook);
+    Book.save($scope.newBook, function(){
+      $scope.books = Book.query();
+      $scope.newBook = {};
+    });
+  };
 }]);
 library.controller('MusicController', ['$scope', function($scope){
 
