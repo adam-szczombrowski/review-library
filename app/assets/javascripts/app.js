@@ -21,6 +21,7 @@ library.config(['$routeProvider', function($routeProvider){
 
 library.controller('BooksController', ['$scope', 'Book', function($scope, Book){
   $scope.books = Book.query();
+  $scope.book = Book.get({id: 1});
 }]);
 library.controller('MusicController', ['$scope', function($scope){
 
