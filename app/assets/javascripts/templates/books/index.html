@@ -1,19 +1,83 @@
-{{ books }}
-<form novalidate class="simple-form">
-    Author: <input type="text" ng-model="newBook.author" /><br />
-    Title: <input type="text" ng-model="newBook.title" /><br />
-    Review: <input type="text" ng-model="newBook.review" /><br />
-    Rating: <select name="Rating" ng-model="newBook.rating">
-      <option value=1>1</option>
-      <option value=1>2</option>
-      <option value=3>3</option>
-      <option value=4>4</option>
-      <option value=5>5</option>
-    </select><br />
-    <input type="submit" ng-click="save()" value="Save" />
-</form>
-<ul>
-  <li ng-repeat="book in books | orderBy:orderProp | limitTo:6" >
-    {{ book.id }} {{ book.author }} {{ book.title }} {{ book.review }} {{ book.rating }}
-  </li>
-</ul>
+<div class="col-md-8">
+  <div class='row'>
+    <button type="button" class="btn btn-default pull-right" ng-click="toggleForm()">{{ buttonName }}</button>
+    <span ng-show="!showForm">Search: <input ng-model="query" placeholder='by author, title or review'></span>
+  </div>
+  <form novalidate name='reviewForm' class="form-horizontal" ng-submit="save(reviewForm.$valid)" ng-show="showForm">
+    <div class='form-group' ng-class="{ 'has-error' : reviewForm.author.$invalid && !reviewForm.author.$pristine }">
+      <label class="col-md-2 control-label">Author</label>
+      <div class='col-md-6'>
+        <input type="text" name='author' class="form-control" ng-model="newBook.author" placeholder="Author" required>
+        <p ng-show="reviewForm.author.$invalid && !reviewForm.author.$pristine" class="help-block">Author is required.</p>
+      </div>
+    </div>
+    <div class='form-group' ng-class="{ 'has-error' : reviewForm.title.$invalid && !reviewForm.title.$pristine }">
+      <label class="col-md-2 control-label">Title</label>
+      <div class='col-md-6'>
+        <input type="text" name="title" class="form-control" ng-model="newBook.title" placeholder="Title" required>
+        <p ng-show="reviewForm.title.$invalid && !reviewForm.title.$pristine" class="help-block">Title is required.</p>
+      </div>
+    </div>
+    <div class='form-group' ng-class="{ 'has-error' : reviewForm.review.$invalid && !reviewForm.review.$pristine }">
+      <label class="col-md-2 control-label">Review</label>
+      <div class='col-md-6'>
+        <textarea name="review" class="form-control" ng-model="newBook.review" placeholder="Review" required></textarea>
+        <p ng-show="reviewForm.review.$invalid && !reviewForm.review.$pristine" class="help-block">Review is required.</p>
+      </div>
+    </div>
+    <div class='form-group' ng-class="{ 'has-error' : reviewForm.rating.$invalid && !reviewForm.rating.$pristine }">
+      <label class='col-md-2 control-label'>Rating</label>
+      <div class='col-md-6'>
+        <label class="radio-inline">
+          <input type="radio"  ng-model="newBook.rating" value="1" required> 1
+        </label>
+        <label class="radio-inline">
+          <input type="radio" ng-model="newBook.rating" value="2"> 2
+        </label>
+        <label class="radio-inline">
+          <input type="radio" ng-model="newBook.rating" value="3"> 3
+        </label>
+        <label class="radio-inline">
+          <input type="radio" ng-model="newBook.rating" value="4"> 4
+        </label>
+        <label class="radio-inline">
+          <input type="radio" ng-model="newBook.rating" value="5"> 5
+        </label>
+      </div>
+    </div>
+    <div class='form-group'>
+      <div class='col-md-6 col-md-offset-2'>
+        <button type="submit" class="btn btn-default" ng-disabled="reviewForm.$invalid">Add review </button>
+      </div>
+    </div>
+  </form>
+  <hr ng-show="showForm">
+  <ul class='list-unstyled'>
+    <li ng-repeat="book in books | filter:query | orderBy:'-updated_at' | limitTo:6" >
+        <div class='row'>
+          <div class="col-md-4">
+              <!-- <img ng-src="{{book.image}}" alt="cover" ng-show="{{book.image}}"> -->
+              <img ng-src="{{book.image}}" alt="{{book.title}} cover">
+          </div>
+          <div class="col-md-8">
+            <ul class='list-unstyled'>
+              <li><p><b>Author:</b> {{book.author}}</p> </li>
+              <li><p><b>Title:</b> {{book.title}}  </p> </li>
+              <li><p><b>Rating:</b> {{book.rating}}</p></li>
+            </ul>
+              <p>{{ book.review }}</p>
+          </div>
+        </div>
+      <hr>
+    </li>
+  </ul>
+</div>
+<div class="col-md-4" ng-show='showForm'>
+  <ul class='list-unstyled'>
+    <li><p><b>Author:</b> {{newBook.author}}</p> </li>
+    <li><p><b>Title: </b>{{newBook.title}}  </p> </li>
+    <li><p><b>Rating:</b> {{newBook.rating}}</p></li>
+  </ul>
+    <p>{{ newBook.review }}</p>
+
+</div>
