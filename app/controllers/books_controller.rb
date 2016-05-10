@@ -1,6 +1,5 @@
 class BooksController < ApplicationController
     skip_before_filter :verify_authenticity_token
-    before_action :user_exists?
 
     def index
       @books = Book.where(user_id: current_user.id)
@@ -21,6 +20,7 @@ class BooksController < ApplicationController
     def create
       @book = Book.new(book_params)
       @book.user_id = current_user.id
+      @book.image = GoogleBooks.search(@book.title).first.image_link || nil
       @book.save
       redirect_to root_path
     end
@@ -36,10 +36,6 @@ class BooksController < ApplicationController
     end
 
     private
-
-    def user_exists?
-      redirect_to root_path unless current_user
-    end
 
     def book_params
       params.require(:book).permit(:author, :review, :rating, :title)
