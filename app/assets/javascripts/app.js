@@ -20,15 +20,28 @@ library.config(['$routeProvider', function($routeProvider){
 }]);
 
 library.controller('BooksController', ['$scope', 'Book', function($scope, Book){
-  $scope.books = Book.query();
-  $scope.newBook = {};
-  $scope.orderProp = '-updated_at';
-  $scope.save = function(){
+  $scope.init = function(){
+    $scope.buttonName = 'Create review';
+    $scope.showForm = false;
+    $scope.books = Book.query();
+    $scope.newBook = {};
+    $scope.query = '';
+  };
+
+  $scope.init();
+
+  $scope.toggleForm = function(){
+    $scope.showForm = !$scope.showForm;
+    $scope.buttonName = $scope.showForm ? 'Hide form' : 'Create review';
+  };
+
+  $scope.save = function(isValid){
     console.log($scope.newBook);
-    Book.save($scope.newBook, function(){
-      $scope.books = Book.query();
-      $scope.newBook = {};
-    });
+    if(isValid){
+      Book.save($scope.newBook, function(){
+        $scope.init();
+      });
+    }
   };
 }]);
 library.controller('MusicController', ['$scope', function($scope){
