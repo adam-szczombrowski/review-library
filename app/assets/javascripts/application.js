@@ -17,4 +17,7 @@
 //= require angular-route/angular-route
 //= require angular-rails-templates
 //= require angular-resource/angular-resource
+//= require angular-animate/angular-animate
+//= require angular-touch/angular-touch
+//= require angular-bootstrap
 //= require_tree .

@@ -1,5 +1,6 @@
 (function(){
-var library = angular.module('library', ['templates', 'ngRoute', 'booksServices']);
+var library = angular.module('library', ['templates', 'ngRoute', 'booksServices',
+'booksDirectives', 'ui.bootstrap']);
 
 library.config(['$routeProvider', function($routeProvider){
   $routeProvider
@@ -26,6 +27,8 @@ library.controller('BooksController', ['$scope', 'Book', function($scope, Book){
     $scope.books = Book.query();
     $scope.newBook = {};
     $scope.query = '';
+    $scope.currentPage = 1;
+    $scope.totalItems = $scope.books.length;
   };
 
   $scope.init();

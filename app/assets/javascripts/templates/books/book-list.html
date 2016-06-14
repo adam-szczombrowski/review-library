@@ -1,0 +1,18 @@
+<ul class='list-unstyled'>
+  <li ng-repeat="book in books | filter:query | orderBy:'-updated_at'" >
+    <div class='row'>
+      <div class="col-md-4">
+        <img ng-src="{{book.image}}" alt="{{book.title}} cover">
+      </div>
+      <div class="col-md-8">
+        <ul class='list-unstyled'>
+          <li><p><b>Author:</b> {{book.author}}</p> </li>
+          <li><p><b>Title:</b> {{book.title}}  </p> </li>
+          <li><p><b>Rating:</b> {{book.rating}}</p></li>
+        </ul>
+        <p>{{ book.review }}</p>
+      </div>
+    </div>
+    <hr>
+  </li>
+</ul>

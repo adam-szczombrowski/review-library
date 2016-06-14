@@ -1,0 +1,48 @@
+<form novalidate name='reviewForm' class="form-horizontal" ng-submit="save(reviewForm.$valid)" ng-show="showForm">
+  <div class='form-group' ng-class="{ 'has-error' : reviewForm.author.$invalid && !reviewForm.author.$pristine }">
+    <label class="col-md-2 control-label">Author</label>
+    <div class='col-md-6'>
+      <input type="text" name='author' class="form-control" ng-model="newBook.author" placeholder="Author" required>
+      <p ng-show="reviewForm.author.$invalid && !reviewForm.author.$pristine" class="help-block">Author is required.</p>
+    </div>
+  </div>
+  <div class='form-group' ng-class="{ 'has-error' : reviewForm.title.$invalid && !reviewForm.title.$pristine }">
+    <label class="col-md-2 control-label">Title</label>
+    <div class='col-md-6'>
+      <input type="text" name="title" class="form-control" ng-model="newBook.title" placeholder="Title" required>
+      <p ng-show="reviewForm.title.$invalid && !reviewForm.title.$pristine" class="help-block">Title is required.</p>
+    </div>
+  </div>
+  <div class='form-group' ng-class="{ 'has-error' : reviewForm.review.$invalid && !reviewForm.review.$pristine }">
+    <label class="col-md-2 control-label">Review</label>
+    <div class='col-md-6'>
+      <textarea name="review" class="form-control" ng-model="newBook.review" placeholder="Review" required></textarea>
+      <p ng-show="reviewForm.review.$invalid && !reviewForm.review.$pristine" class="help-block">Review is required.</p>
+    </div>
+  </div>
+  <div class='form-group' ng-class="{ 'has-error' : reviewForm.rating.$invalid && !reviewForm.rating.$pristine }">
+    <label class='col-md-2 control-label'>Rating</label>
+    <div class='col-md-6'>
+      <label class="radio-inline">
+        <input type="radio"  ng-model="newBook.rating" value="1" required> 1
+      </label>
+      <label class="radio-inline">
+        <input type="radio" ng-model="newBook.rating" value="2"> 2
+      </label>
+      <label class="radio-inline">
+        <input type="radio" ng-model="newBook.rating" value="3"> 3
+      </label>
+      <label class="radio-inline">
+        <input type="radio" ng-model="newBook.rating" value="4"> 4
+      </label>
+      <label class="radio-inline">
+        <input type="radio" ng-model="newBook.rating" value="5"> 5
+      </label>
+    </div>
+  </div>
+  <div class='form-group'>
+    <div class='col-md-6 col-md-offset-2'>
+      <button type="submit" class="btn btn-default" ng-disabled="reviewForm.$invalid">Add review </button>
+    </div>
+  </div>
+</form>

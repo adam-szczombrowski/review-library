@@ -20,7 +20,6 @@ class BooksController < ApplicationController
     def create
       @book = Book.new(book_params)
       @book.user_id = current_user.id
-      @book.image = GoogleBooks.search(@book.title).first.image_link || nil
       @book.save
       redirect_to root_path
     end
