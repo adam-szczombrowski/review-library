@@ -9,14 +9,6 @@ library.config(['$routeProvider', function($routeProvider){
     templateUrl: 'books/index.html',
     controller: 'BooksController'
   })
-  .when('/movies', {
-    templateUrl: 'movies/index.html',
-    controller: 'MoviesController'
-  })
-  .when('music', {
-    templateUrl: 'music/index.html',
-    controller: 'MusicController'
-  })
   .otherwise({redirectTo: '/'});
 }]);
 
