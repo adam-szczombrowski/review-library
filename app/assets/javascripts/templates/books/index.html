@@ -1,12 +1,18 @@
-<div class="col-md-8">
-  <div class='row'>
+
+<div class="row top-row">
+  <div class='col-md-8'>
     <button type="button" class="btn btn-default pull-right" ng-click="toggleForm()">{{ buttonName }}</button>
-    <span ng-show="!showForm">Search: <input ng-model="query" placeholder='by author, title or review'></span>
+    <input ng-show="!showForm" ng-model="query" placeholder='Search by author, title or review' class="pretty-input">
+    <book-form></book-form>
+    <hr ng-show="showForm">
   </div>
-  <book-form></book-form>
-  <hr ng-show="showForm">
-  <book-list></book-list>
+  <div class="col-md-4" ng-show='showForm'>
+    <book-preview></book-preview>
+  </div>
 </div>
-<div class="col-md-4" ng-show='showForm'>
-  <book-preview></book-preview>
+
+<div class="row">
+  <div class="col-md-8">
+    <book-list></book-list>
+  </div>
 </div>
